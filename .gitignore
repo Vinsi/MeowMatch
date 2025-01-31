@@ -1,0 +1,74 @@
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode User-Specific Files
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+*.xcuserstate
+project.xcworkspace/
+
+# Derived Data & Build Artifacts
+DerivedData/
+build/
+*.o
+*.swp
+*.xcdebugger/
+*.xcsettings/
+
+# Swift Package Manager (SPM) Artifacts
+.swiftpm/
+Package.resolved
+.build/
+
+# CocoaPods Dependencies
+Pods/
+Podfile.lock
+
+# Carthage Dependencies
+Carthage/
+Carthage/Checkouts/
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+fastlane/.env
+
+# Firebase Crashlytics & Google Services
+GoogleService-Info.plist
+Crashlytics/
+
+# Environment Files
+.env
+*.secret
+
+# Archives
+*.xcarchive
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace/
+
+# Logs
+*.log
+*.out
+
+# Editor Backups
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# xcresult (Test Results)
+*.xcresult
+
+# Git Ignore for Swift Package Manager
+sourcePackages/
+
+# Ignore Temporary Files
+*.tmp
