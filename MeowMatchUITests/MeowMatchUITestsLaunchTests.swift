@@ -2,7 +2,7 @@
 //  MeowMatchUITestsLaunchTests.swift
 //  MeowMatchUITests
 //
-//  Created by Vinsi on 24/01/2025.
+//  Created by Vinsi.
 //
 
 import XCTest

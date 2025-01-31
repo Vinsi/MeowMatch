@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "494BFD8B-605F-47B3-BB0E-8141C69BA063",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MeowMatch.xcodeproj",
+        "identifier" : "150E47E92D443A0F0003D761",
+        "name" : "MeowMatchTests"
+      }
+    }
+  ],
+  "version" : 1
+}
