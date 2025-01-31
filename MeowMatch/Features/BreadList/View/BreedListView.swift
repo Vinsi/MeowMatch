@@ -1,0 +1,59 @@
+//
+//  BreedListView.swift
+//  MeowMatch
+//
+//  Created by Vinsi.
+//
+let logPaging = LogWriter(.init(value: "List"))
+let log = LogWriter(.init(value: "Meow"))
+
+import SwiftUI
+
+struct BreedListView: View {
+    @EnvironmentObject private var router: Router
+    @EnvironmentObject private var environment: AppEnvironment
+    @EnvironmentObject private var themeManager: ThemeManager
+    @StateObject var viewModel: BreedListViewModel
+    var onTap: ((ListViewDataType) -> Void)?
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                ZStack(alignment: .top) {
+                    CatListView(
+                        breeds: viewModel.viewData,
+                        onTap: viewModel.onSelect(_:),
+                        onAppear5thLastElement: {
+                            viewModel.loadMore()
+                        }
+                    )
+
+                    if viewModel.pageIsLoading {
+                        HUDLoaderView()
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    }
+                }
+                .background(AppBackground())
+            }
+            .refreshable {
+                viewModel.loadFromStart()
+            }
+            .navigationTitle(Localized.breedTitle)
+            .navigationBarTitleDisplayMode(.inline)
+            .task {
+                viewModel.configure(router: router)
+                viewModel.initialFetch()
+            }
+        }.tabItem {
+            Label(Localized.breedTitle,
+                  systemImage: themeManager.currentTheme.images.listSystemIcon)
+        }
+    }
+}
+
+#Preview {
+    BreedListView(viewModel: BreedListViewModel(service: MockBreadListServiceType()))
+        .environmentObject(AppEnvironment.shared)
+        .environmentObject(Router())
+        .environmentObject(ThemeManager())
+}
