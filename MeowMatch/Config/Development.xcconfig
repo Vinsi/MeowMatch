@@ -1,0 +1,17 @@
+//
+//  Development.xcconfig
+//
+//
+//  Created by Vinsi.
+//
+
+#include "Base.xcconfig"
+
+// Development Configuration
+API_BASE_URL = api.thecatapi.com
+ENABLE_DEBUG_FEATURES = YES
+LOG_LEVEL = DEBUG
+SCHEME_NAME = DEV
+
+// Overrides
+PRODUCT_BUNDLE_IDENTIFIER = com.vinsi.meowmatch.dev

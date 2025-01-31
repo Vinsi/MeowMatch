@@ -1,0 +1,17 @@
+//
+//  Staging.xcconfig
+//
+//
+//  Created by Vinsi.
+//
+
+#include "Base.xcconfig"
+
+// Development Configuration
+API_BASE_URL = api.thecatapi.com
+ENABLE_DEBUG_FEATURES = NO
+LOG_LEVEL = INFO
+SCHEME_NAME = STAG
+
+// Overrides
+PRODUCT_BUNDLE_IDENTIFIER = com.vinsi.meowmatch.staging

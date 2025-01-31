@@ -1,0 +1,12 @@
+//
+//  Base.xcconfig
+//
+//
+//  Created by Vinsi
+//
+API_TOKEN = "live_rlnIsqkJDsGOJQ4ss1grArLBPnoejlAKMyCS7YOaFIHUEo3rp2UWguZewHJqu3UJ" // storing in xcconfig not secure for time being as its for interview purpose in production it should securly handled
+CODE_SIGN_STYLE = Automatic
+ENABLE_BITCODE = NO
+PRODUCT_BUNDLE_IDENTIFIER = com.vinsi.meowmatch
+SWIFT_VERSION = 5.0
+PAGE_SIZE = "10"
