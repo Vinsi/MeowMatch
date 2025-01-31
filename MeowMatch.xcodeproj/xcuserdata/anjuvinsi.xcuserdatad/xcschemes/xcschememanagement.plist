@@ -4,10 +4,48 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>MeowMatch.xcscheme_^#shared#^_</key>
+		<key>Development.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>MeowMatchTests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>MeowMatchUITests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Production.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Staging.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>150E47D92D443A0D0003D761</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>150E47E92D443A0F0003D761</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>150E47F32D443A0F0003D761</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

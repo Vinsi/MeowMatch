@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UILaunchStoryboardName</key>
+	<string>Launch Screen</string>
+	<key>AppConfiguration</key>
+	<dict>
+		<key>SCHEME_NAME</key>
+		<string>$(SCHEME_NAME)</string>
+		<key>BASE_URL</key>
+		<string>$(API_BASE_URL)</string>
+		<key>PAGE_SIZE</key>
+		<string>$(PAGE_SIZE)</string>
+		<key>TOKEN</key>
+		<string>$(API_TOKEN)</string>
+	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>AvenirNextLTPro-Bold.otf</string>
+		<string>AvenirNextLTPro-It.otf</string>
+		<string>AvenirNextLTPro-Regular.otf</string>
+		<string>Poppins-Regular.ttf</string>
+		<string>Poppins-SemiBold.ttf</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,296 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "adaptability" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adaptability"
+          }
+        }
+      }
+    },
+    "affection_level" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Affection Level"
+          }
+        }
+      }
+    },
+    "attributes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attributes"
+          }
+        }
+      }
+    },
+    "breed_list_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breed List"
+          }
+        }
+      }
+    },
+    "cfa" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CFA"
+          }
+        }
+      }
+    },
+    "child_friendly" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Child Friendly"
+          }
+        }
+      }
+    },
+    "detail_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breed Details"
+          }
+        }
+      }
+    },
+    "disconnected" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disconnected"
+          }
+        }
+      }
+    },
+    "dog_friendly" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dog Friendly"
+          }
+        }
+      }
+    },
+    "energy_level" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energy Level"
+          }
+        }
+      }
+    },
+    "failed_to_decode" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to decode: %@"
+          }
+        }
+      }
+    },
+    "grooming" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grooming"
+          }
+        }
+      }
+    },
+    "health_issues" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Health Issues"
+          }
+        }
+      }
+    },
+    "intelligence" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intellingence"
+          }
+        }
+      }
+    },
+    "learn_more" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Learn More"
+          }
+        }
+      }
+    },
+    "life_span" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Span: %@ years"
+          }
+        }
+      }
+    },
+    "life_span_attribute" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Life Span"
+          }
+        }
+      }
+    },
+    "malformed_url" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Malformed URL"
+          }
+        }
+      }
+    },
+    "no_internet_connection" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Internet Connection"
+          }
+        }
+      }
+    },
+    "origin" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Origin: %@"
+          }
+        }
+      }
+    },
+    "search_breed_button" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        }
+      }
+    },
+    "search_breed_placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search by cat breed.."
+          }
+        }
+      }
+    },
+    "search_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search Breed"
+          }
+        }
+      }
+    },
+    "shedding_level" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shedding Level"
+          }
+        }
+      }
+    },
+    "temperament" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temperament"
+          }
+        }
+      }
+    },
+    "unknown" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown"
+          }
+        }
+      }
+    },
+    "vca_hospital" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VCA Hospital"
+          }
+        }
+      }
+    },
+    "vetstreet" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VET Street"
+          }
+        }
+      }
+    },
+    "wikipedia" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wikipedia"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
