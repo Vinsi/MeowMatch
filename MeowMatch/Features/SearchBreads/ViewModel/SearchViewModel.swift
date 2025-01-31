@@ -50,6 +50,10 @@ final class SearchViewModel: ObservableObject {
         }
     }
 
+    func retry() {
+        search(searchText)
+    }
+
     func configure(router: Router) {
         self.router = router
     }

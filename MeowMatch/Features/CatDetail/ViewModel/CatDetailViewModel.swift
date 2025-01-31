@@ -22,9 +22,15 @@ final class CatDetailViewModel: ObservableObject {
         sections = .fetching
         Task { [weak self] in
             guard let self, let id = self.breed.id else { return }
-            let images = try await service.getImages(id: id)
-            DispatchQueue.main.async { [self] in
-                self.createSections(imageURLs: images.compactMap(\.url?.asURL))
+            do {
+                let images = try await service.getImages(id: id)
+                DispatchQueue.main.async { [self] in
+                    self.createSections(imageURLs: images.compactMap(\.url?.asURL))
+                }
+            } catch {
+                DispatchQueue.main.async { [self] in
+                    self.sections = .failure(error)
+                }
             }
         }
     }

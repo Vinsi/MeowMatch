@@ -17,9 +17,6 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>AvenirNextLTPro-Bold.otf</string>
-		<string>AvenirNextLTPro-It.otf</string>
-		<string>AvenirNextLTPro-Regular.otf</string>
 		<string>Poppins-Regular.ttf</string>
 		<string>Poppins-SemiBold.ttf</string>
 	</array>

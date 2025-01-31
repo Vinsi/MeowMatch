@@ -44,7 +44,15 @@ struct BreedListView: View {
                 viewModel.configure(router: router)
                 viewModel.initialFetch()
             }
-        }.tabItem {
+            .onDisappear {}
+        }
+        .errorAlert(
+            isPresented: $viewModel.isError,
+            errorMessage: Localized.Error.connectionError,
+            retryAction: viewModel.retry
+        )
+
+        .tabItem {
             Label(Localized.breedTitle,
                   systemImage: themeManager.currentTheme.images.listSystemIcon)
         }

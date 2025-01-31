@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct AppEntry: App {
     @StateObject var router = Router()
-    @StateObject var themeManager = ThemeManager()
+    @ObservedObject var themeManager = ThemeManager()
     let internetConnectivityChecker = InternetConnectivityChecker.shared
 
     init() {
@@ -38,6 +38,9 @@ struct AppEntry: App {
         appearance.largeTitleTextAttributes = [.foregroundColor: colors.primary.toUIColor ?? .purple]
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        // swiftlint:disable line_length
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = colors.primary.toUIColor ?? .purple
+        // swiftlint:enable line_length
     }
 }
 
@@ -56,10 +59,11 @@ struct RootView: View {
             .accentColor(themeManager.currentTheme.colors.primary)
 
             if internet.isConnected == false {
-                Text(Localized.Error.noInternetConnection).frame(height: 20) // TODO: -Need to work on
+                let theme = themeManager.currentTheme
+                Text(Localized.Error.noInternetConnection).frame(height: theme.dimensions.shortBannerHeight)
                     .padding()
-                    .foregroundColor(themeManager.currentTheme.colors.secondary)
-                    .background(RoundedRectangle(cornerRadius: themeManager.currentTheme.dimensions.cornerRadius)
+                    .foregroundColor(theme.colors.secondary)
+                    .background(RoundedRectangle(cornerRadius: theme.dimensions.cornerRadius)
                         .fill(themeManager.currentTheme.colors.primary))
             }
         }

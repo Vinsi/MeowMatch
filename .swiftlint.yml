@@ -3,10 +3,7 @@ disabled_rules:
   - closure_parameter_name
 
 # Alternatively, you can enable all rules first and disable specific ones
-whitelist_rules:
-  - all
 disabled_rules:
-  - closure_parameter_name
 
 # Exclude specific files or directories from linting
 excluded:

@@ -10,6 +10,7 @@ final class BreedListViewModel: ObservableObject {
 
     @Published var pageIsLoading = false
     @Published var viewData: [ListViewDataType] = []
+    @Published var isError: Bool = false
     private var router: Router?
     private let listService: BreedListServiceType
     private let pageSize = 10
@@ -22,8 +23,8 @@ final class BreedListViewModel: ObservableObject {
     func loadFromStart() {
         log.logI("load.start")
         pagingManager.reset()
-        Task {
-            await pagingManager.fetchNextPage()
+        Task { [weak self] in
+            self?.fetch()
         }
     }
 
@@ -32,15 +33,15 @@ final class BreedListViewModel: ObservableObject {
             return
         }
         pagingManager.reset()
-        Task {
-            await pagingManager.fetchNextPage()
+        Task { [weak self] in
+            self?.fetch()
         }
     }
 
     func loadMore() {
         log.logI("load.more")
-        Task {
-            await pagingManager.fetchNextPage()
+        Task { [weak self] in
+            self?.fetch()
         }
     }
 
@@ -53,6 +54,34 @@ final class BreedListViewModel: ObservableObject {
             return
         }
         router?.navigate(to: .details(breed: breed))
+    }
+
+    private func fetch() {
+        Task { [weak self] in
+            do {
+                await self?.hideError()
+                try await self?.pagingManager.fetchNextPage()
+            } catch {
+                await self?.showError()
+            }
+        }
+    }
+
+    func retry() {
+        pageIsLoading = false
+        Task { [weak self] in
+            self?.fetch()
+        }
+    }
+
+    @MainActor
+    private func showError() {
+        isError = true
+    }
+
+    @MainActor
+    private func hideError() {
+        isError = false
     }
 }
 
@@ -68,45 +97,5 @@ extension BreedListViewModel: Paginatable {
 
     func reset() {
         viewData.removeAll()
-    }
-}
-
-protocol ListViewDataType {
-    var breedID: String { get }
-    var breedName: String { get }
-    var breedOrigin: String { get }
-    var breedTemperament: String { get }
-    var breedDescription: String { get }
-    var breedImageURL: URL? { get }
-    var breedLifeSpan: String { get }
-}
-
-extension CatBreed: ListViewDataType {
-    var breedID: String {
-        id ?? ""
-    }
-
-    var breedName: String {
-        name ?? ""
-    }
-
-    var breedOrigin: String {
-        origin ?? ""
-    }
-
-    var breedTemperament: String {
-        temperament ?? ""
-    }
-
-    var breedDescription: String {
-        description ?? ""
-    }
-
-    var breedImageURL: URL? {
-        imageURL
-    }
-
-    var breedLifeSpan: String {
-        lifeSpan ?? ""
     }
 }

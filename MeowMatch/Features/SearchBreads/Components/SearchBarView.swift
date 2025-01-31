@@ -64,6 +64,7 @@ struct SearchBarView: View {
                 .opacity(searchText.isEmpty ? 0.0 : 1.0)
                 .square(size: theme.dimensions.iconSizeSmall)
                 .onTapGesture {
+                    UIApplication.shared.dismissKeyboard()
                     searchText = ""
                 }
         }

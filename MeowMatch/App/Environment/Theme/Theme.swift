@@ -17,22 +17,21 @@ protocol Theme {
 }
 
 struct Typography {
-    let largeTitle: Font
     let title: Font
     let mediumTitle: Font
     let body: Font
-    let caption: Font
-    let cellTitle: Font
-    let cellDescription: Font
+
+    let cellTitleLarge: Font
+    let cellMedium: Font
+    let cellSmall: Font
 
     init() {
-        largeTitle = .custom("AvenirNextLTPro-Bold", size: 32)
-        title = .custom("Poppins-Regular", size: 24) // .custom("AvenirNextLTPro-Regular", size: 24) //Poppins-Regular
-        mediumTitle = .custom("AvenirNextLTPro-Regular", size: 14)
-        body = .custom("AvenirNextLTPro-Regular", size: 16)
-        caption = .custom("AvenirNextLTPro-Regular", size: 12)
-        cellTitle = .custom("Poppins-SemiBold", size: 14)
-        cellDescription = .custom("Poppins-Regular", size: 14)
+        title = .custom("Poppins-Regular", size: 24)
+        mediumTitle = .custom("Poppins-Regular", size: 14)
+        body = .custom("Poppins-Regular", size: 16)
+        cellTitleLarge = .custom("Poppins-SemiBold", size: 14)
+        cellMedium = .custom("Poppins-Regular", size: 14)
+        cellSmall = .custom("Poppins-Regular", size: 12)
     }
 }
 
@@ -46,6 +45,7 @@ struct Dimensions {
     let imageAspectRatio: CGFloat
     let thumbSize: CGSize
     let cardHeight: CGFloat
+    let shortBannerHeight: CGFloat
 
     init(
         buttonHeight: CGFloat = 44,
@@ -56,7 +56,8 @@ struct Dimensions {
         avatarSize: CGSize = CGSize(width: 100, height: 100),
         thumbSize: CGSize = CGSize(width: 80, height: 80),
         imageAspectRatio: CGFloat = 16 / 9,
-        cardHeight: CGFloat = 250
+        cardHeight: CGFloat = 250,
+        shortBannerHeight: CGFloat = 20
     ) {
         self.buttonHeight = buttonHeight
         self.buttonWidth = buttonWidth
@@ -67,6 +68,7 @@ struct Dimensions {
         self.thumbSize = thumbSize
         self.imageAspectRatio = imageAspectRatio
         self.cardHeight = cardHeight
+        self.shortBannerHeight = shortBannerHeight
     }
 }
 
@@ -132,7 +134,8 @@ struct DefaultTheme: Theme {
         buttonHeight: 44,
         buttonWidth: 250,
         iconSize: 32,
-        cornerRadius: 10
+        cornerRadius: 10,
+        shortBannerHeight: 20
     )
 }
 

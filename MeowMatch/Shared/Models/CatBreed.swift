@@ -104,6 +104,6 @@ extension CatBreed {
 
     var imageURL: URL? {
         guard let referenceImageID else { return nil }
-        return URL(string: "https://cdn2.thecatapi.com/images/\(referenceImageID).jpg") // FIXME: need image to conr
+        return URL(string: "https://cdn2.thecatapi.com/images/\(referenceImageID).jpg")
     }
 }

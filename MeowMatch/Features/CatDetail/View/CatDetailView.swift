@@ -13,12 +13,17 @@ struct CatDetailView: View {
     @EnvironmentObject var environment: AppEnvironment
     @EnvironmentObject var themeManager: ThemeManager
     @Environment(\.presentationMode) var presentationMode
+    @State var hasError: Bool = false
+
+    var theme: Theme {
+        themeManager.currentTheme
+    }
 
     @ViewBuilder
     private func attributeSection(_ title: String, _ attributes: [(title: String, value: String)]) -> some View {
-        VStack(alignment: .leading, spacing: themeManager.currentTheme.spacing.medium) {
+        VStack(alignment: .leading, spacing: theme.spacing.medium) {
             Text(title)
-                .font(.title2)
+                .font(theme.typography.title)
                 .fontWeight(.semibold)
 
             ForEach(attributes, id: \.title) { attribute in
@@ -30,13 +35,13 @@ struct CatDetailView: View {
 
     @ViewBuilder
     private func descriptions(_ title: String, _ description: String) -> some View {
-        VStack(alignment: .leading, spacing: themeManager.currentTheme.spacing.medium) {
+        VStack(alignment: .leading, spacing: theme.spacing.medium) {
             Text(title)
-                .font(.largeTitle)
+                .font(theme.typography.title)
                 .fontWeight(.bold)
 
             Text(description)
-                .font(.body)
+                .font(theme.typography.body)
                 .foregroundColor(.secondary)
         }
         .padding(.horizontal)
@@ -44,9 +49,9 @@ struct CatDetailView: View {
 
     @ViewBuilder
     private func moreLinks(_ title: String, _ links: [(title: String, url: URL)]) -> some View {
-        VStack(alignment: .leading, spacing: themeManager.currentTheme.spacing.medium) {
+        VStack(alignment: .leading, spacing: theme.spacing.medium) {
             Text(title)
-                .font(.title2)
+                .font(theme.typography.title)
                 .fontWeight(.semibold)
             ForEach(links, id: \.url.absoluteString) { link in
                 Link(link.title, destination: link.url)
@@ -97,8 +102,6 @@ struct CatDetailView: View {
                     switch viewModel.sections {
                     case .success(let sections):
                         createSections(sections: sections)
-                    case .failure(let error):
-                        Text(error.localizedDescription)
                     default:
                         EmptyView()
                     }
@@ -110,6 +113,9 @@ struct CatDetailView: View {
             }
             .task {
                 viewModel.fetchImages()
+            }
+            .onDisappear {
+                hasError = false
             }
 
             if case .fetching = viewModel.sections {
@@ -123,6 +129,18 @@ struct CatDetailView: View {
         .toolbar {
             toolBar()
         }
+        .onChange(of: viewModel.sections, perform: { newValue in
+            if case .failure = newValue {
+                hasError = true
+            } else {
+                hasError = false
+            }
+        })
+        .errorAlert(
+            isPresented: $hasError,
+            errorMessage: viewModel.sections.errorMessage,
+            retryAction: viewModel.fetchImages
+        )
     }
 }
 
@@ -150,5 +168,24 @@ struct AppBackground: View {
         Image(themeManager.currentTheme.images.pattern)
             .resizable(resizingMode: .tile)
             .opacity(0.1)
+    }
+}
+
+extension View {
+
+    func errorAlert(
+        isPresented: Binding<Bool>,
+        errorMessage: String?,
+        retryAction: @escaping () -> Void
+    ) -> some View {
+        alert(
+            Localized.ErrorAlert.title,
+            isPresented: isPresented,
+            presenting: errorMessage
+        ) { _ in
+            Button(Localized.ErrorAlert.retry, action: retryAction)
+        } message: { error in
+            Text(error)
+        }
     }
 }

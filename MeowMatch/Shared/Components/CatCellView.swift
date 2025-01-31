@@ -41,33 +41,33 @@ struct CatCellView: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.small) {
                     Text(viewData.breedName)
-                        .font(.title.bold())
-                        .foregroundColor(.primary)
+                        .font(theme.typography.cellMedium)
+                        .foregroundColor(theme.colors.textPrimary)
 
                     Text(viewData.breedTemperament)
-                        .font(.caption2)
-                        .foregroundColor(.secondary)
+                        .font(theme.typography.cellSmall)
+                        .foregroundColor(theme.colors.textSecondary)
                         .lineLimit(1)
                         .truncationMode(.tail)
 
                     HStack {
                         Text(Localized.Breed.origin(viewData.breedOrigin))
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                            .font(theme.typography.cellSmall)
+                            .foregroundColor(theme.colors.textSecondary)
 
                         Spacer()
 
                         Text(Localized.Breed.lifeSpan(viewData.breedLifeSpan))
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                            .font(theme.typography.cellSmall)
+                            .foregroundColor(theme.colors.textSecondary)
                     }
                 }
             }
 
             HStack {
                 Text(viewData.breedDescription)
-                    .font(.footnote)
-                    .foregroundColor(.primary)
+                    .font(theme.typography.cellMedium)
+                    .foregroundColor(theme.colors.textSecondary)
                 Spacer()
             }
         }

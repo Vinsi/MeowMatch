@@ -12,6 +12,7 @@ struct SearchView: View {
     @EnvironmentObject private var environment: AppEnvironment
     @EnvironmentObject private var themeManager: ThemeManager
     @StateObject var viewModel: SearchViewModel
+    @State var hasError = false
 
     var body: some View {
         NavigationView {
@@ -46,12 +47,25 @@ struct SearchView: View {
                 }
             }
         }
+
         .tabItem {
             Label(
                 Localized.searchTitle,
                 systemImage: themeManager.currentTheme.images.searchSystemIcon
             )
         }
+        .onChange(of: viewModel.dataState, perform: { newValue in
+            if case .failure = newValue {
+                hasError = true
+            } else {
+                hasError = false
+            }
+        })
+        .errorAlert(
+            isPresented: $hasError,
+            errorMessage: viewModel.dataState.errorMessage,
+            retryAction: viewModel.retry
+        )
     }
 }
 

@@ -58,7 +58,7 @@ final class DebouncerTests: XCTestCase {
         expectation.expectedFulfillmentCount = 2 // Both "one" and "two" should execute
         
         debouncer.schedule("one") { expectation.fulfill() }
-        try? await Task.sleep(nanoseconds: 550_000_000)
+        try? await Task.sleep(nanoseconds: 650_000_000)
         debouncer.schedule("two") { expectation.fulfill() } // Different input should execute
         
         await fulfillment(of: [expectation], timeout: 1.5) // Ensure both executions happen

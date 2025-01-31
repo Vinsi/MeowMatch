@@ -17,12 +17,18 @@ enum Localized {
     static let learnMore = String(localized: "learn_more")
     static let attributes = String(localized: "attributes")
 
+    enum ErrorAlert {
+        static let title = String(localized: "error")
+        static let retry = String(localized: "retry")
+    }
+
     // Error Messages
     enum Error {
         static let malformedURL = String(localized: "malformed_url")
         static let unknown = String(localized: "unknown")
         static let disconnected = String(localized: "disconnected")
         static let noInternetConnection = String(localized: "no_internet_connection")
+        static let connectionError = String(localized: "connection_error")
         static func failedToDecode(message: String) -> String {
             String(format: NSLocalizedString("failed_to_decode", comment: ""), message)
         }

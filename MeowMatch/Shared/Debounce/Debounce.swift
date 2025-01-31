@@ -29,6 +29,7 @@ final class Debouncer<T: Equatable> {
     func schedule(_ input: T, _ task: @escaping () async -> Void) {
         guard input != lastInput else { return }
         lastInput = input
+
         // Cancel the current task if it exists
         currentTask?.cancel()
 

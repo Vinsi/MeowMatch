@@ -36,23 +36,19 @@ final class PagingManager<T: Paginatable> {
         viewModel?.reset()
     }
 
-    func fetchNextPage() async {
+    func fetchNextPage() async throws {
         guard let viewModel, !viewModel.pageIsLoading, hasMorePages else {
             logPaging.logW("page.finished.exiting", .success)
             return
         }
         await isFetching(true)
-        do {
-            let newItems = try await viewModel.fetchPage(page: currentPage, size: pageSize)
-            currentPage += 1
-            hasMorePages = newItems.count == pageSize
-            await MainActor.run {
-                viewModel.add(items: newItems)
-            }
-        } catch {
-            logPaging.logI("page.error.\(error.localizedDescription)", .failure)
+        let newItems = try await viewModel.fetchPage(page: currentPage, size: pageSize)
+        hasMorePages = newItems.count == pageSize
+        await MainActor.run {
+            viewModel.add(items: newItems)
         }
         await isFetching(false)
+        currentPage += 1
     }
 
     @MainActor

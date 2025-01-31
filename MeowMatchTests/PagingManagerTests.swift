@@ -12,6 +12,14 @@ import XCTest
 
 final class PagingManagerTests: XCTestCase {
     class MockPaginatable: Paginatable {
+        func add(items: [String]) {
+            pagedItems.append(contentsOf: items)
+        }
+        
+        func reset() {
+            pagedItems.removeAll()
+        }
+        
         typealias DataType = String
         
         var pagedItems: [String] = []
@@ -48,7 +56,7 @@ final class PagingManagerTests: XCTestCase {
         let pagingManager = PagingManager(viewModel: mockViewModel, startingPage: 0)
         
         Task {
-            await pagingManager.fetchNextPage()
+            try await pagingManager.fetchNextPage()
             pagingManager.reset()
             
             XCTAssertFalse(mockViewModel.pageIsLoading)
@@ -58,44 +66,44 @@ final class PagingManagerTests: XCTestCase {
         }
     }
     
-    func testFetchNextPage_Success() async {
+    func testFetchNextPage_Success() async throws  {
         let mockViewModel = MockPaginatable(totalItems: 10)
         let pagingManager = PagingManager(viewModel: mockViewModel, startingPage: 0)
 
-        await pagingManager.fetchNextPage()
+        try await pagingManager.fetchNextPage()
 
         XCTAssertEqual(mockViewModel.pagedItems.count, 10) // Page size is 10
         XCTAssertEqual(pagingManager.currentPage, 1)
     }
     
-    func testFetchNextPage_StopsWhenLoading() async {
+    func testFetchNextPage_StopsWhenLoading() async throws  {
         let mockViewModel = MockPaginatable(totalItems: 3)
         let pagingManager = PagingManager(viewModel: mockViewModel, startingPage: 0)
 
         mockViewModel.pageIsLoading = true // Simulate loading state
-        await pagingManager.fetchNextPage()
+        try await pagingManager.fetchNextPage()
 
         XCTAssertEqual(mockViewModel.pagedItems.count, 0) // No fetch should occur
     }
     
-    func testFetchNextPage_ErrorHandling() async {
+    func testFetchNextPage_ErrorHandling() async throws  {
         enum MockError: Error { case fetchFailed }
         
         let mockViewModel = MockPaginatable(totalItems: 3, fetchError: MockError.fetchFailed)
         let pagingManager = PagingManager(viewModel: mockViewModel, startingPage: 0)
 
-        await pagingManager.fetchNextPage()
-        
+        try await pagingManager.fetchNextPage()
+
         XCTAssertEqual(mockViewModel.pagedItems.count, 0) // Should not add items
         XCTAssertEqual(pagingManager.currentPage, 0) // Page should not advance
     }
     
-    func testHasMorePages_FetchStops() async {
+    func testHasMorePages_FetchStops() async throws  {
         let mockViewModel = MockPaginatable(totalItems: 12) // Only one page
         let pagingManager = PagingManager(viewModel: mockViewModel, startingPage: 0)
 
-        await pagingManager.fetchNextPage()
-        await pagingManager.fetchNextPage() // Second fetch should not work
+        try await pagingManager.fetchNextPage()
+        try await pagingManager.fetchNextPage() // Second fetch should not work
 
         XCTAssertEqual(mockViewModel.pagedItems.count, 12) // Only one page should be loaded
         XCTAssertFalse(pagingManager.hasMorePages) // No more pages left

@@ -27,16 +27,10 @@
 		150E47DA2D443A0D0003D761 /* MeowMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeowMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		150E47EA2D443A0F0003D761 /* MeowMatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeowMatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		150E47F42D443A0F0003D761 /* MeowMatchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeowMatchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		15AAEEF52D4CC58B001611A2 /* MeowMatchTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MeowMatchTests.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		15B8FA7D2D4C462600B98558 /* Exceptions for "MeowMatchTests" folder in "MeowMatchTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				MeowMatchTests.xctestplan,
-			);
-			target = 150E47E92D443A0F0003D761 /* MeowMatchTests */;
-		};
 		15BCEE7B2D450689007FFFB2 /* Exceptions for "MeowMatch" folder in "MeowMatch" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -61,9 +55,6 @@
 		};
 		150E47ED2D443A0F0003D761 /* MeowMatchTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				15B8FA7D2D4C462600B98558 /* Exceptions for "MeowMatchTests" folder in "MeowMatchTests" target */,
-			);
 			path = MeowMatchTests;
 			sourceTree = "<group>";
 		};
@@ -106,6 +97,7 @@
 				150E47ED2D443A0F0003D761 /* MeowMatchTests */,
 				150E47F72D443A0F0003D761 /* MeowMatchUITests */,
 				150E47DB2D443A0D0003D761 /* Products */,
+				15AAEEF52D4CC58B001611A2 /* MeowMatchTests.xctestplan */,
 			);
 			sourceTree = "<group>";
 		};
@@ -477,7 +469,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Debug-Development";
 		};
@@ -513,7 +505,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Release-Production";
 		};
@@ -716,7 +708,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Staging-Development";
 		};
