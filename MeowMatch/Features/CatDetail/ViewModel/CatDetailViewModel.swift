@@ -7,10 +7,18 @@
 
 import Foundation
 
+/// 🐱 **ViewModel for Cat Details Screen**
+/// - Handles fetching images, preparing attributes, and managing UI state.
+/// - Uses `DataState` to track loading, success, and failure states.
 final class CatDetailViewModel: ObservableObject {
+
+    /// 🔄 **Published State**: Holds the current state of detail sections.
     @Published var sections: DataState<[DetailSection], any Error> = .notStarted
 
+    /// 🐾 **Breed Information**
     let breed: CatBreed
+
+    /// 📸 **Service to Fetch Breed Images**
     let service: CatImageServiceType
 
     init(service: CatImageServiceType, breed: CatBreed) {
@@ -24,23 +32,27 @@ final class CatDetailViewModel: ObservableObject {
             guard let self, let id = self.breed.id else { return }
             do {
                 let images = try await service.getImages(id: id)
-                DispatchQueue.main.async { [self] in
+                await MainActor.run {
                     self.createSections(imageURLs: images.compactMap(\.url?.asURL))
                 }
             } catch {
-                DispatchQueue.main.async { [self] in
+                await MainActor.run {
                     self.sections = .failure(error)
                 }
             }
         }
     }
 
+    // MARK: - 🔗 Create Links
+
+    /// Creates a list of external links related to the breed.
+    /// - Returns: An array of tuples containing the link title and URL.
     private func createLinks() -> [(String, URL)] {
         return [
             (Localized.Links.wikipedia, breed.wikipediaURL),
             (Localized.Links.cfa, breed.cfaURL),
             (Localized.Links.vetStreet, breed.vetstreetURL),
-            (Localized.Links.vcaHospital, breed.vcahospitalsURL),
+            (Localized.Links.vcaHospital, breed.vcahospitalsURL)
         ]
         .compactMap {
             guard let url = $0.1?.asURL else { return nil }
@@ -48,6 +60,10 @@ final class CatDetailViewModel: ObservableObject {
         }
     }
 
+    // MARK: - 📊 Create Attributes
+
+    /// Creates a list of breed-specific attributes for display.
+    /// - Returns: An array of tuples containing attribute names and values.
     private func createAttributes() -> [(String, String)] {
         [
             (Localized.Attributes.adaptability, breed.adaptability?.as5star),
@@ -60,7 +76,7 @@ final class CatDetailViewModel: ObservableObject {
             (Localized.Attributes.intelligence, breed.intelligence?.as5star),
             (Localized.Attributes.sheddingLevel, breed.sheddingLevel?.as5star),
             (Localized.Attributes.lifeSpan, breed.lifeSpan),
-            (Localized.Attributes.temperament, breed.temperament),
+            (Localized.Attributes.temperament, breed.temperament)
         ]
         .compactMap { value -> (String, String)? in
             guard let text = value.1 else {
@@ -70,6 +86,10 @@ final class CatDetailViewModel: ObservableObject {
         }
     }
 
+    // MARK: - 📦 Create Sections
+
+    /// Creates sections for the cat detail screen.
+    /// - Parameter imageURLs: An array of image URLs.
     private func createSections(imageURLs: [URL]) {
         var sections = [DetailSection]()
         sections.append(.images(imageURLs))

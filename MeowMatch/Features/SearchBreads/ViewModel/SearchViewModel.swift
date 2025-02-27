@@ -35,6 +35,10 @@ final class SearchViewModel: ObservableObject {
                 }
 
                 let list = try await self?.searchService.search(query: query) ?? []
+                guard query == self?.debouncer.lastInput else {
+                    log.logE("search.removed.stale.for[\(query)].response", .failure)
+                    return
+                }
 
                 await MainActor.run { [weak self] in
                     self?.isLoading = false

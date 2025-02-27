@@ -16,44 +16,41 @@ struct SearchView: View {
 
     var body: some View {
         NavigationView {
-            ZStack {
-                AppBackground()
-                VStack(alignment: .leading) {
-                    SearchBarView(
-                        searchText: $viewModel.searchText,
-                        isLoading: $viewModel.isLoading,
-                        placeholder: Localized.searchBreedPlaceholder,
-                        theme: themeManager.currentTheme
-                    )
-                    .padding(.top, themeManager.currentTheme.spacing.medium)
+            VStack {
+                ZStack {
+                    AppBackground()
 
-                    if case .success(let cats) = viewModel.dataState {
-                        CatListView(
-                            breeds: cats,
-                            onTap: viewModel.onSelect(_:)
+                    VStack(alignment: .leading) {
+                        SearchBarView(
+                            searchText: $viewModel.searchText,
+                            isLoading: $viewModel.isLoading,
+                            placeholder: Localized.searchBreedPlaceholder,
+                            theme: themeManager.currentTheme
                         )
+                        .padding(.top, themeManager.currentTheme.spacing.medium)
+
+                        if case .success(let cats) = viewModel.dataState {
+                            CatListView(
+                                breeds: cats,
+                                onTap: viewModel.onSelect(_:)
+                            )
+                        }
+
+                        if case .fetching = viewModel.dataState {
+                            ProgressView().padding()
+                        }
+
+                        Spacer()
                     }
-
-                    if case .fetching = viewModel.dataState {
-                        ProgressView().padding()
-                    }
-
-                    Spacer()
-                }
-
-                .navigationBarTitleDisplayMode(.inline)
-                .task {
-                    viewModel.configure(router: router)
                 }
             }
+            .padding(.bottom, 0)
         }
+        .onAppear {
+            viewModel.configure(router: router)
+        }
+        .navigationBarTitleDisplayMode(.inline)
 
-        .tabItem {
-            Label(
-                Localized.searchTitle,
-                systemImage: themeManager.currentTheme.images.searchSystemIcon
-            )
-        }
         .onChange(of: viewModel.dataState, perform: { newValue in
             if case .failure = newValue {
                 hasError = true
@@ -66,8 +63,16 @@ struct SearchView: View {
             errorMessage: viewModel.dataState.errorMessage,
             retryAction: viewModel.retry
         )
+        .tabItem {
+            Label(
+                Localized.searchTitle,
+                systemImage: themeManager.currentTheme.images.searchSystemIcon
+            )
+        }
     }
 }
+
+// MARK: - 🛠 Preview
 
 #Preview {
     SearchView(viewModel: SearchViewModel(searchService: MockBreadSearchServiceType(onExecute: {

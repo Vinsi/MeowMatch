@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CatDetailView: View {
 
-    @StateObject var viewModel: CatDetailViewModel
+    @ObservedObject var viewModel: CatDetailViewModel
     @EnvironmentObject var environment: AppEnvironment
     @EnvironmentObject var themeManager: ThemeManager
     @Environment(\.presentationMode) var presentationMode

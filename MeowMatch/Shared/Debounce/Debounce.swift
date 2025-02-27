@@ -18,9 +18,8 @@ struct WorkItem<T: Equatable> {
 
 final class Debouncer<T: Equatable> {
     private var currentTask: WorkItem<T>?
-    private var currentTaskID: UUID?
     private let delay: TimeInterval
-    private var lastInput: T? // Keeps track of the last input
+    private(set) var lastInput: T? // Keeps track of the last input
 
     init(delay: TimeInterval) {
         self.delay = delay
@@ -40,7 +39,7 @@ final class Debouncer<T: Equatable> {
         let workItem = DispatchWorkItem { [weak self] in
             guard self?.lastInput == param else {
                 // Ignore stale tasks
-                log.logW("ignored.stale.response.\(param)")
+                log.logW("ignored.stale.request.\(param)")
                 return
             }
             Task {

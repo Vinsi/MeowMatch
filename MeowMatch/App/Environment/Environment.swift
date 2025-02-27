@@ -5,20 +5,19 @@
 //  Created by Vinsi.
 //
 
-protocol BaseURLProvider {
-    var baseURL: String { get }
-}
-
-protocol TokenProvider {
-    var token: String { get }
-}
-
 import Foundation
 import UIKit
 
-// MARK: - Environment
+// MARK: - **App Environment Manager**
+
+/// 🌍 **Singleton Class for Managing Environment Variables**
+/// - Implements `BaseURLProvider` & `TokenProvider`
+/// - Loads values from the app's configuration (Info.plist )
+/// - Provides environment-specific settings
 
 final class AppEnvironment: ObservableObject, BaseURLProvider, TokenProvider {
+
+    // 🚀 **Shared Instance (Singleton)**
     static let shared = AppEnvironment()
 
     private(set) lazy var scheme: Scheme = {
@@ -35,16 +34,20 @@ final class AppEnvironment: ObservableObject, BaseURLProvider, TokenProvider {
         case production
     }
 
+    /// 🔒 **Private Initializer - Ensures Singleton**
     private init() {}
 
+    /// ✅ **Check if the App is Running in Production**
     var isProduction: Bool {
         scheme == .production
     }
 
+    /// 🌍 **Fetch API Base URL from App Config**
     var baseURL: String {
         Bundle.main.getAppConfig(for: .baseURL) ?? ""
     }
 
+    /// 🔐 **Fetch API Token from App Config**
     var token: String {
         Bundle.main.getAppConfig(for: .token) ?? ""
     }

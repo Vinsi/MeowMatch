@@ -15,12 +15,13 @@ struct BreadSearchServiceImpl: BreadSearchServiceType {
 
     func search(query: String) async throws -> [CatBreed] {
         defer {
-            logNet.logI("search.query:->\(query)-completed")
+            log.logI("search.query:->['\(query)'].completed")
         }
-        logNet.logW("search.query:->\(query)")
+        log.logW("search.query:->['\(query)'].started")
         guard query.isNotEmpty else {
             return []
         }
         return try await network.request(from: BreedSearchEndpoint(baseURL: baseURLProvider.baseURL, searchText: query))
     }
 }
+

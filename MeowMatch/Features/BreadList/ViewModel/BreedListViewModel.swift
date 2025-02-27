@@ -6,13 +6,23 @@
 //
 import Foundation
 
+/// 🐱 **ViewModel for Managing Cat Breed List**
+/// - Handles data fetching, pagination, and error states.
+/// - Uses `PagingManager` to support paginated API calls.
+
 final class BreedListViewModel: ObservableObject {
 
+    /// 🏗 **Published Properties for UI Updates**
     @Published var pageIsLoading = false
     @Published var viewData: [ListViewDataType] = []
     @Published var isError: Bool = false
+    private(set) var errorMessage: String?
+
+    /// 📌 **Dependencies**
     private var router: Router?
     private let listService: BreedListServiceType
+
+    /// 📖 **Pagination Setup**
     private let pageSize = 10
     lazy var pagingManager = PagingManager<BreedListViewModel>(viewModel: self)
 
@@ -21,7 +31,6 @@ final class BreedListViewModel: ObservableObject {
     }
 
     func loadFromStart() {
-        log.logI("load.start")
         pagingManager.reset()
         Task { [weak self] in
             self?.fetch()
@@ -39,7 +48,6 @@ final class BreedListViewModel: ObservableObject {
     }
 
     func loadMore() {
-        log.logI("load.more")
         Task { [weak self] in
             self?.fetch()
         }
@@ -62,11 +70,14 @@ final class BreedListViewModel: ObservableObject {
                 await self?.hideError()
                 try await self?.pagingManager.fetchNextPage()
             } catch {
+                self?.errorMessage = error.localizedDescription
                 await self?.showError()
             }
         }
     }
 
+    /// 🔄 **Retry Fetching After Failure**
+    /// - Resets loading state and attempts to fetch again.
     func retry() {
         pageIsLoading = false
         Task { [weak self] in
@@ -86,11 +97,19 @@ final class BreedListViewModel: ObservableObject {
 }
 
 extension BreedListViewModel: Paginatable {
+
+    /// 📦 **Fetches a Page of Cat Breeds**
+    /// - Parameters:
+    ///   - page: Page number to fetch.
+    ///   - size: Number of items per page.
+    /// - Returns: A list of `CatBreed` objects.
+    /// - Throws: If the request fails.
     func fetchPage(page: Int, size: Int) async throws -> [CatBreed] {
-        logPaging.logI("loadPaging page: \(page) - \(size)")
         return try await listService.getAll(page: page, limit: size)
     }
 
+    /// ➕ **Adds New Items to ViewData**
+    /// - Appends fetched breeds to the list.
     func add(items: [CatBreed]) {
         viewData.append(contentsOf: items)
     }

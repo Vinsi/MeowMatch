@@ -10,12 +10,20 @@ import SwiftUI
 final class Router: ObservableObject {
 
     public enum Destination: Codable, Hashable {
-        case search
-        case list
+      //  case search
+      //  case list
         case details(breed: CatBreed)
     }
 
+    // Define top-level tabs
+    public enum Tab: String, CaseIterable {
+        case list
+        case search
+
+    }
+
     @Published var navPath = NavigationPath()
+    @Published var selectedTab: Tab = .list
 
     func navigate(to destination: Destination) {
         navPath.append(destination)
@@ -42,20 +50,9 @@ extension Router.Destination {
             let viewModel = CatDetailViewModel(service: service,
                                                breed: cat)
             CatDetailView(viewModel: viewModel)
-        case .search:
-            let network = NetworkProcesserTypeImpl()
-            let environment = AppEnvironment.shared
-            let service = BreadSearchServiceImpl(network: network, baseURLProvider: environment)
-            let viewModel = SearchViewModel(searchService: service)
-            SearchView(viewModel: viewModel)
-        case .list:
-            let network = NetworkProcesserTypeImpl()
-            let environment = AppEnvironment.shared
-            let service = BreedListServiceImpl(network: network, baseURLProvider: environment)
-            let viewModel = BreedListViewModel(service: service)
-            BreedListView(viewModel: viewModel)
         }
     }
+
 }
 
 extension View {
@@ -64,4 +61,6 @@ extension View {
             destination.toView
         }
     }
+
+
 }

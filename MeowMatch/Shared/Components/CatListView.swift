@@ -20,7 +20,6 @@ struct CatListView: View {
             )
             .onAppear {
                 guard breeds.lastNthItem(is: breed, nthIndex: 5) else {
-                    logPaging.logI("Not Loding More")
                     return
                 }
                 onAppear5thLastElement?()

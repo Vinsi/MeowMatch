@@ -6,6 +6,7 @@
 //
 let logPaging = LogWriter(.init(value: "List"))
 let log = LogWriter(.init(value: "Meow"))
+let logNet = LogWriter(.init(value: "Net"))
 
 import SwiftUI
 
@@ -16,6 +17,7 @@ struct BreedListView: View {
     @StateObject var viewModel: BreedListViewModel
     var onTap: ((ListViewDataType) -> Void)?
 
+
     var body: some View {
         NavigationView {
             VStack {
@@ -23,8 +25,8 @@ struct BreedListView: View {
                     CatListView(
                         breeds: viewModel.viewData,
                         onTap: viewModel.onSelect(_:),
-                        onAppear5thLastElement: {
-                            viewModel.loadMore()
+                        onAppear5thLastElement: { [weak viewModel] in
+                            viewModel?.loadMore()
                         }
                     )
 
@@ -48,7 +50,7 @@ struct BreedListView: View {
         }
         .errorAlert(
             isPresented: $viewModel.isError,
-            errorMessage: Localized.Error.connectionError,
+            errorMessage: viewModel.errorMessage,
             retryAction: viewModel.retry
         )
 

@@ -7,16 +7,25 @@
 
 import SwiftUI
 
+/// 🏁 **Main Entry Point of the App**
 @main
 struct AppEntry: App {
+
+    /// 📌 **Router for Navigation Handling**
     @StateObject var router = Router()
+
+    /// 🎨 **Theme Manager for Dark/Light Mode**
     @ObservedObject var themeManager = ThemeManager()
+
+    /// 🌐 **Internet Connectivity Checker (Singleton)**
     let internetConnectivityChecker = InternetConnectivityChecker.shared
 
+    /// 🎨 **Initialize App with Navigation Bar Styling**
     init() {
         applyNavigationBarStyle()
     }
 
+    /// 🏠 **Main Scene - Defines the UI Structure**
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $router.navPath) {
@@ -30,6 +39,7 @@ struct AppEntry: App {
         }
     }
 
+    /// 🎨 **Apply Custom Navigation Bar Styling**
     private func applyNavigationBarStyle() {
         let appearance = UINavigationBarAppearance()
         let colors = themeManager.currentTheme.colors
@@ -44,27 +54,59 @@ struct AppEntry: App {
     }
 }
 
+/***
+   Note Separating as its convienice for look ups.
+ */
+/// 📌 **Root View - Manages Tabs & Internet Alerts**
 struct RootView: View {
+    /// 🎨 Access the Theme Manager
     @EnvironmentObject var themeManager: ThemeManager
+
+    /// 🌐 Check Internet Connectivity
     @EnvironmentObject var internet: InternetConnectivityChecker
+
+    /// 📌 Handle Navigation Routing
     @EnvironmentObject var router: Router
+
+    /// 📌 Handle Navigation Routing
+    @EnvironmentObject var environemnt: AppEnvironment
+
 
     var body: some View {
         ZStack {
-            TabView {
-                Router.Destination.list.toView
+            TabView(selection: $router.selectedTab) {
+                BreedListView(
+                    viewModel: BreedListViewModel(
+                        service:
+                            BreedListServiceImpl(
+                                baseURLProvider: environemnt,
+                                network: NetworkProcesserTypeImpl()
+                            )
+                    )
+                )
+                .tag(Router.Tab.list)
 
-                Router.Destination.search.toView
+                SearchView(
+                    viewModel: SearchViewModel(
+                        searchService: BreadSearchServiceImpl(
+                            network: NetworkProcesserTypeImpl(),
+                            baseURLProvider: environemnt
+                        )
+                    )
+                )
+                .tag(Router.Tab.search)
             }
+
             .accentColor(themeManager.currentTheme.colors.primary)
 
             if internet.isConnected == false {
                 let theme = themeManager.currentTheme
+                // 🚨 No Internet Message
                 Text(Localized.Error.noInternetConnection).frame(height: theme.dimensions.shortBannerHeight)
                     .padding()
                     .foregroundColor(theme.colors.secondary)
                     .background(RoundedRectangle(cornerRadius: theme.dimensions.cornerRadius)
-                        .fill(themeManager.currentTheme.colors.primary))
+                    .fill(themeManager.currentTheme.colors.primary))
             }
         }
     }

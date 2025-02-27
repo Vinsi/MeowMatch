@@ -8,6 +8,9 @@
 import SwiftUICore
 import UIKit
 
+// MARK: - **Theme Protocol** 🎨
+
+/// Defines a theme containing typography, colors, spacing, images, and dimensions.
 protocol Theme {
     var typography: Typography { get }
     var colors: ColorPalette { get }
@@ -16,6 +19,9 @@ protocol Theme {
     var dimensions: Dimensions { get }
 }
 
+// MARK: - **Typography Configuration** 🅰️
+
+/// Defines font styles for different text elements.
 struct Typography {
     let title: Font
     let mediumTitle: Font
@@ -34,6 +40,10 @@ struct Typography {
         cellSmall = .custom("Poppins-Regular", size: 12)
     }
 }
+
+// MARK: - **Dimensions Configuration** 📏
+
+/// Defines UI component sizes, aspect ratios, and spacing.
 
 struct Dimensions {
     let buttonHeight: CGFloat
@@ -99,8 +109,7 @@ struct DefaultColorPalette: ColorPalette {
          secondary: Color = Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)),
          background: Color = Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)),
          textPrimary: Color = Color(#colorLiteral(red: 0.09019608051, green: 0, blue: 0.3019607961, alpha: 1)),
-         textSecondary: Color = Color(#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)))
-    {
+         textSecondary: Color = Color(#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1))) {
         self.primary = primary
         self.secondary = secondary
         self.background = background
@@ -139,6 +148,9 @@ struct DefaultTheme: Theme {
     )
 }
 
+// MARK: - **Theme Manager** 🎨
+
+/// Manages and updates the app theme dynamically.
 final class ThemeManager: ObservableObject {
     @Published var currentTheme: Theme
 

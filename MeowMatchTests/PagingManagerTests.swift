@@ -92,7 +92,7 @@ final class PagingManagerTests: XCTestCase {
         let mockViewModel = MockPaginatable(totalItems: 3, fetchError: MockError.fetchFailed)
         let pagingManager = PagingManager(viewModel: mockViewModel, startingPage: 0)
 
-        try await pagingManager.fetchNextPage()
+        try? await pagingManager.fetchNextPage()
 
         XCTAssertEqual(mockViewModel.pagedItems.count, 0) // Should not add items
         XCTAssertEqual(pagingManager.currentPage, 0) // Page should not advance

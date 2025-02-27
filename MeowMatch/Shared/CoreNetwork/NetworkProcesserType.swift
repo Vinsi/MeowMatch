@@ -33,13 +33,17 @@ struct NetworkProcesserTypeImpl: NetworkProcesserType {
             throw NetworkError.invalidURL
         }
 
-        log.logI(cacheKey, .success)
         if let cachedData = await cache.getValue(forKey: cacheKey) {
+            logNet.logW("network.from.cache[\(request.url?.absoluteString ?? "" )]")
             return try decoder.decode(T.Response.self, from: cachedData)
         } else {
-            let response = try await urlTaskProvider.data(for: endpoint.request.makeUrlRequest())
+            let request = try endpoint.request.makeUrlRequest()
+            logNet.logI("network.started[\(request.url?.absoluteString ?? "" )]")
+            let response = try await urlTaskProvider.data(for: request)
+            logNet.logI("network.completed[\(request.url?.absoluteString ?? "" )]",.success)
+            let responseModel =  try extractResponse(response, type: T.Response.self)
             await cache.setValue(response.0, forKey: cacheKey)
-            return try extractResponse(response, type: T.Response.self)
+            return responseModel
         }
     }
 
