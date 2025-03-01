@@ -7,6 +7,7 @@
 
 struct BreedSearchEndpoint: EndPointType {
     let request = RequestBuilder()
+    let baseURL = BaseURLProvider.self
     init(baseURL: String, searchText: String) {
         request
             .add(baseURL: baseURL)

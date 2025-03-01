@@ -8,6 +8,12 @@
             "state" : "translated",
             "value" : "Adaptability"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adaptabilité"
+          }
         }
       }
     },
@@ -17,6 +23,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Affection Level"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveau d'affection"
           }
         }
       }
@@ -28,6 +40,12 @@
             "state" : "translated",
             "value" : "Attributes"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attributs"
+          }
         }
       }
     },
@@ -38,12 +56,24 @@
             "state" : "translated",
             "value" : "Breed List"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste des races"
+          }
         }
       }
     },
     "cfa" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CFA"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "CFA"
@@ -58,6 +88,12 @@
             "state" : "translated",
             "value" : "Child Friendly"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adapté aux enfants"
+          }
         }
       }
     },
@@ -67,6 +103,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connection Error"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur de connexion"
           }
         }
       }
@@ -78,6 +120,12 @@
             "state" : "translated",
             "value" : "Breed Details"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Détails de la race"
+          }
         }
       }
     },
@@ -87,6 +135,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Disconnected"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déconnecté"
           }
         }
       }
@@ -98,6 +152,12 @@
             "state" : "translated",
             "value" : "Dog Friendly"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ami des chiens"
+          }
         }
       }
     },
@@ -107,6 +167,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Energy Level"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveau d'énergie"
           }
         }
       }
@@ -118,6 +184,12 @@
             "state" : "translated",
             "value" : "Error in Communication"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur de communication"
+          }
         }
       }
     },
@@ -127,6 +199,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Failed to decode: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Échec du décodage: %@"
           }
         }
       }
@@ -138,6 +216,12 @@
             "state" : "translated",
             "value" : "Grooming"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toilettage"
+          }
         }
       }
     },
@@ -147,6 +231,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Health Issues"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Problèmes de santé"
           }
         }
       }
@@ -158,6 +248,22 @@
             "state" : "translated",
             "value" : "Intellingence"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intelligence"
+          }
+        }
+      }
+    },
+    "language" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langue"
+          }
         }
       }
     },
@@ -167,6 +273,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Learn More"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En savoir plus"
           }
         }
       }
@@ -178,6 +290,12 @@
             "state" : "translated",
             "value" : "Life Span: %@ years"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durée de vie: %@ ans"
+          }
         }
       }
     },
@@ -187,6 +305,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Life Span"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durée de vie: %@ ans"
           }
         }
       }
@@ -198,6 +322,12 @@
             "state" : "translated",
             "value" : "Malformed URL"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL mal formée"
+          }
         }
       }
     },
@@ -207,6 +337,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No Internet Connection"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas de connexion Internet"
           }
         }
       }
@@ -218,6 +354,12 @@
             "state" : "translated",
             "value" : "Origin: %@"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Origine: %@"
+          }
         }
       }
     },
@@ -227,6 +369,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Retry"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réessayer"
           }
         }
       }
@@ -238,6 +386,12 @@
             "state" : "translated",
             "value" : "Search"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher"
+          }
         }
       }
     },
@@ -247,6 +401,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search by cat breed.."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher par race de chat.."
           }
         }
       }
@@ -258,6 +418,44 @@
             "state" : "translated",
             "value" : "Search Breed"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher une race"
+          }
+        }
+      }
+    },
+    "select_language" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select Language"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sélectionner la langue"
+          }
+        }
+      }
+    },
+    "setting_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paramètres"
+          }
         }
       }
     },
@@ -267,6 +465,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Shedding Level"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveau de perte de poils"
           }
         }
       }
@@ -278,6 +482,12 @@
             "state" : "translated",
             "value" : "Temperament"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tempérament"
+          }
         }
       }
     },
@@ -287,6 +497,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unknown"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inconnu"
           }
         }
       }
@@ -298,12 +514,24 @@
             "state" : "translated",
             "value" : "VCA Hospital"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hôpital VCA"
+          }
         }
       }
     },
     "vetstreet" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VET Street"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "VET Street"
@@ -317,6 +545,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wikipedia"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wikipédia"
           }
         }
       }

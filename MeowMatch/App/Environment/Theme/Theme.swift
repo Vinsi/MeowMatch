@@ -129,6 +129,7 @@ struct Images {
     let searchIcon = "Search"
     let pattern = "Pattern"
     let searchSystemIcon = "magnifyingglass"
+    let settingSystemIcon = "gear"
     let listSystemIcon = "list.bullet"
     let closeSystemIcon = "xmark.circle.fill"
     let placeHolderSystemIcon = "photo"

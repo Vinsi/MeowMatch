@@ -11,53 +11,54 @@ struct SearchView: View {
     @EnvironmentObject private var router: Router
     @EnvironmentObject private var environment: AppEnvironment
     @EnvironmentObject private var themeManager: ThemeManager
-    @StateObject var viewModel: SearchViewModel
+    @StateObject var viewModel: SearchViewModel = SearchViewModel(
+        searchService: BreadSearchServiceImpl(network: NetworkProcesserTypeImpl())
+    )
     @State var hasError = false
 
     var body: some View {
         NavigationView {
             VStack {
-                ZStack {
-                    AppBackground()
+                               ZStack {
+                 AppBackground()
 
-                    VStack(alignment: .leading) {
-                        SearchBarView(
-                            searchText: $viewModel.searchText,
-                            isLoading: $viewModel.isLoading,
-                            placeholder: Localized.searchBreedPlaceholder,
-                            theme: themeManager.currentTheme
-                        )
-                        .padding(.top, themeManager.currentTheme.spacing.medium)
+                                    VStack(alignment: .leading) {
+                                        SearchBarView(
+                                            searchText: $viewModel.searchText,
+                                            isLoading: $viewModel.isLoading,
+                                            placeholder: Localized.searchBreedPlaceholder,
+                                            theme: themeManager.currentTheme
+                                        )
+                                        .padding(.top, themeManager.currentTheme.spacing.medium)
+                                        Spacer()
 
-                        if case .success(let cats) = viewModel.dataState {
-                            CatListView(
-                                breeds: cats,
-                                onTap: viewModel.onSelect(_:)
-                            )
-                        }
+                                        if case .success(let cats) = viewModel.dataState {
+                                            CatListView(
+                                                breeds: cats,
+                                                onTap: viewModel.onSelect(_:)
+                                            )
+                                        }
+                                    }
+                               }
 
-                        if case .fetching = viewModel.dataState {
-                            ProgressView().padding()
-                        }
+            }
 
-                        Spacer()
-                    }
+
+            .onAppear {
+                viewModel.configure(router: router)
+            }
+            
+            .navigationBarTitleDisplayMode(.inline)
+
+            .onChange(of: viewModel.dataState, perform: { newValue in
+                if case .failure = newValue {
+                    hasError = true
+                } else {
+                    hasError = false
                 }
-            }
-            .padding(.bottom, 0)
+            })
         }
-        .onAppear {
-            viewModel.configure(router: router)
-        }
-        .navigationBarTitleDisplayMode(.inline)
 
-        .onChange(of: viewModel.dataState, perform: { newValue in
-            if case .failure = newValue {
-                hasError = true
-            } else {
-                hasError = false
-            }
-        })
         .errorAlert(
             isPresented: $hasError,
             errorMessage: viewModel.dataState.errorMessage,

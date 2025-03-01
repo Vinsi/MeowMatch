@@ -23,7 +23,7 @@ protocol BreedListServiceType {
 }
 
 struct BreedListServiceImpl: BreedListServiceType {
-    var baseURLProvider: any BaseURLProvider
+    let baseURLProvider: BaseURLProvider = AppEnvironment.shared
     var network: NetworkProcesserType
 
     func getAll(page: Int, limit: Int) async throws -> [CatBreed] {

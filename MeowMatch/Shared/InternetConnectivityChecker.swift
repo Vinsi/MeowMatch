@@ -8,23 +8,32 @@
 import Foundation
 import Network
 
-final class InternetConnectivityChecker: ObservableObject {
+enum ConnectionType {
+    case wifi
+    case cellular
+    case wired
+    case unknown
+}
+
+final class InternetConnectivityCheckerImpl: ObservableObject {
+    
     private let monitor = NWPathMonitor()
     private let queue = DispatchQueue(label: #function)
+    private let isMock: Bool
 
-    static let shared = InternetConnectivityChecker() // Singleton for global access
+    init(isMock: Bool = false, isConnected: Bool = true, connectionType: ConnectionType = .unknown) {
+        self.isMock = isMock
+        self.isConnected = isConnected
+        self.connectionType = connectionType
+    }
 
     @Published var isConnected: Bool = true
     @Published var connectionType: ConnectionType = .unknown
 
-    enum ConnectionType {
-        case wifi
-        case cellular
-        case wired
-        case unknown
-    }
+    func startMonitoring() {
 
-    private init() {
+        guard !isMock else { return }
+
         monitor.pathUpdateHandler = { [weak self] path in
             guard let self = self else { return }
             DispatchQueue.main.async {

@@ -12,10 +12,13 @@ enum Localized {
     static let detailTitle = String(localized: "detail_title")
     static let breedTitle = String(localized: "breed_list_title")
     static let searchTitle = String(localized: "search_title")
+    static let settingTitle = String(localized: "setting_title")
     static let searchBreedPlaceholder = String(localized: "search_breed_placeholder")
     static let searchBreedButton = String(localized: "search_breed_button")
     static let learnMore = String(localized: "learn_more")
     static let attributes = String(localized: "attributes")
+    static let selectLanguage = String(localized: "select_language")
+    static let language = String(localized: "language")
 
     enum ErrorAlert {
         static let title = String(localized: "error")

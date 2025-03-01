@@ -6,50 +6,61 @@
 //
 import Foundation
 
-struct WorkItem<T: Equatable> {
-    let query: T
-    let task: DispatchWorkItem
-
-    func cancel() {
-        task.cancel()
-        log.logW("query.cancelled.for:[\(query)]", .failure)
-    }
-}
-
-final class Debouncer<T: Equatable> {
-    private var currentTask: WorkItem<T>?
+final class AsyncDebouncer<Input: Equatable, Output> {
+    private var currentTask: Task<Void, any Error>?
     private let delay: TimeInterval
-    private(set) var lastInput: T? // Keeps track of the last input
+    private var operation: ((Input) async throws -> Output)!
+
+    private(set) var lastInput: Input? // Keeps track of the last input
+    private(set) var lastUUID: UUID?
+    private(set) var loader: (@MainActor (Bool) -> Void)?
 
     init(delay: TimeInterval) {
         self.delay = delay
     }
 
-    func schedule(_ input: T, _ task: @escaping () async -> Void) {
+    func config(loader: @escaping @MainActor (Bool) -> Void) {
+        self.loader = loader
+    }
+
+    func config(operation: @escaping (Input) async throws -> Output) {
+        self.operation = operation
+    }
+
+    func debounce(input: Input, onCompletion: @escaping @MainActor (Result<Output, any Error> ) -> Void) {
         guard input != lastInput else { return }
         lastInput = input
 
         // Cancel the current task if it exists
         currentTask?.cancel()
 
-        // Generate a new task ID to track the latest task
-        let param = input
+        let requestID = UUID()
+        self.lastUUID = requestID
 
-        // Create a new DispatchWorkItem for the task
-        let workItem = DispatchWorkItem { [weak self] in
-            guard self?.lastInput == param else {
-                // Ignore stale tasks
-                log.logW("ignored.stale.request.\(param)")
-                return
-            }
-            Task {
-                await task()
-            }
-        }
+        currentTask = Task {
+            do {
+                try await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+                guard !Task.isCancelled else { return }
 
-        currentTask = WorkItem(query: input, task: workItem)
-        if let task = currentTask?.task {
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: task)
+                await self.loader?(true)
+                let result = try await operation(input)
+                guard requestID == self.lastUUID
+                else {
+                    log.logW("Stale response ignored")
+                    return
+                }
+                await onCompletion(.success(result))
+            }
+            catch is CancellationError {
+                log.logE("CancellationError", .failure)
+            }
+            catch  {
+                if error.localizedDescription != "cancelled" {
+                    log.logE(error.localizedDescription, .failure)
+                    await onCompletion(.failure(error))
+                }
+            }
+            await self.loader?(false)
         }
     }
 }

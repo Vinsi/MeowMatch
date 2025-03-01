@@ -10,8 +10,9 @@ protocol BreadSearchServiceType {
 }
 
 struct BreadSearchServiceImpl: BreadSearchServiceType {
+    
     let network: NetworkProcesserType
-    let baseURLProvider: BaseURLProvider
+    let baseURLProvider: BaseURLProvider = AppEnvironment.shared
 
     func search(query: String) async throws -> [CatBreed] {
         defer {
@@ -22,6 +23,13 @@ struct BreadSearchServiceImpl: BreadSearchServiceType {
             return []
         }
         return try await network.request(from: BreedSearchEndpoint(baseURL: baseURLProvider.baseURL, searchText: query))
+    }
+}
+
+struct mockBreadSearchServiceImpl: BreadSearchServiceType {
+    let dictionary: [String: [CatBreed] ]
+    func search(query: String) async throws -> [CatBreed] {
+        dictionary[query] ?? []
     }
 }
 

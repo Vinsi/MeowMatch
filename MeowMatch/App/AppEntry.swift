@@ -18,10 +18,11 @@ struct AppEntry: App {
     @ObservedObject var themeManager = ThemeManager()
 
     /// 🌐 **Internet Connectivity Checker (Singleton)**
-    let internetConnectivityChecker = InternetConnectivityChecker.shared
+    let internetConnectivityChecker = InternetConnectivityCheckerImpl()
 
     /// 🎨 **Initialize App with Navigation Bar Styling**
     init() {
+        internetConnectivityChecker.startMonitoring()
         applyNavigationBarStyle()
     }
 
@@ -63,37 +64,21 @@ struct RootView: View {
     @EnvironmentObject var themeManager: ThemeManager
 
     /// 🌐 Check Internet Connectivity
-    @EnvironmentObject var internet: InternetConnectivityChecker
+    @EnvironmentObject var internet: InternetConnectivityCheckerImpl
 
     /// 📌 Handle Navigation Routing
     @EnvironmentObject var router: Router
 
     /// 📌 Handle Navigation Routing
-    @EnvironmentObject var environemnt: AppEnvironment
-
+    @EnvironmentObject var environment: AppEnvironment
 
     var body: some View {
         ZStack {
             TabView(selection: $router.selectedTab) {
-                BreedListView(
-                    viewModel: BreedListViewModel(
-                        service:
-                            BreedListServiceImpl(
-                                baseURLProvider: environemnt,
-                                network: NetworkProcesserTypeImpl()
-                            )
-                    )
-                )
+                BreedListView()
                 .tag(Router.Tab.list)
 
-                SearchView(
-                    viewModel: SearchViewModel(
-                        searchService: BreadSearchServiceImpl(
-                            network: NetworkProcesserTypeImpl(),
-                            baseURLProvider: environemnt
-                        )
-                    )
-                )
+                SearchView()
                 .tag(Router.Tab.search)
             }
 
@@ -109,5 +94,18 @@ struct RootView: View {
                     .fill(themeManager.currentTheme.colors.primary))
             }
         }
+
     }
 }
+
+
+// MARK: - 🛠 Preview
+
+#Preview {
+    RootView()
+    .environmentObject(AppEnvironment.shared)
+    .environmentObject(Router())
+    .environmentObject(ThemeManager())
+    .environmentObject(InternetConnectivityCheckerImpl(isMock: true))
+}
+

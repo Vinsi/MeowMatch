@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+@MainActor
 final class SearchViewModel: ObservableObject {
     @Published private(set) var dataState: DataState<[ListViewDataType], any Error> = .notStarted
     @Published var isLoading: Bool = false
@@ -18,41 +18,39 @@ final class SearchViewModel: ObservableObject {
     }
 
     private let searchService: BreadSearchServiceType
-    private let debouncer = Debouncer<String>(delay: 0.3)
+    private let debouncer = AsyncDebouncer<String, [CatBreed] >(delay: 0.3)
     private var router: Router?
 
     init(searchService: BreadSearchServiceType) {
         self.searchService = searchService
+
+        debouncer.config { [weak self] in
+            self?.isLoading = $0
+        }
+
+        debouncer.config(operation: { [weak self] query in
+            let list = try await self?.searchService.search(query: query) ?? []
+            return list
+        })
     }
 
     func search(_ query: String) {
         log.logI("search.started")
-
-        debouncer.schedule(query) { [weak self] in
-            do {
-                await MainActor.run { [weak self] in
-                    self?.isLoading = true
-                }
-
-                let list = try await self?.searchService.search(query: query) ?? []
-                guard query == self?.debouncer.lastInput else {
-                    log.logE("search.removed.stale.for[\(query)].response", .failure)
-                    return
-                }
-
-                await MainActor.run { [weak self] in
-                    self?.isLoading = false
-                    log.logI("search.finished", .success)
-                    self?.dataState = .success(list)
-                }
-            } catch {
-                DispatchQueue.main.async { [weak self] in
-                    log.logI("search.finished", .failure)
-                    self?.dataState = .success([])
-                }
+        debouncer.debounce(input: query) { [weak self] result in
+            switch result {
+            case .success(let breeds):
+                self?.dataState = .success(breeds)
+            case .failure(let error):
+                self?.dataState = .failure(error)
             }
         }
     }
+
+    @MainActor
+    func loader(isShowing: Bool = true) {
+        self.isLoading = isLoading
+    }
+
 
     func retry() {
         search(searchText)
