@@ -121,6 +121,7 @@
 				150E47D62D443A0D0003D761 /* Sources */,
 				150E47D72D443A0D0003D761 /* Frameworks */,
 				150E47D82D443A0D0003D761 /* Resources */,
+				15FF34F12D7D9C3B00C6A715 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -250,6 +251,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		15FF34F12D7D9C3B00C6A715 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path\n./Scripts/format-code.sh MeowMatch\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		150E47D62D443A0D0003D761 /* Sources */ = {
