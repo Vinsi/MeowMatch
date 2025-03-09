@@ -27,7 +27,7 @@ final class AsyncDebouncer<Input: Equatable, Output> {
         self.operation = operation
     }
 
-    func debounce(input: Input, onCompletion: @escaping @MainActor (Result<Output, any Error> ) -> Void) {
+    func debounce(input: Input, onCompletion: @escaping @MainActor (Result<Output, any Error>) -> Void) {
         guard input != lastInput else { return }
         lastInput = input
 
@@ -35,7 +35,7 @@ final class AsyncDebouncer<Input: Equatable, Output> {
         currentTask?.cancel()
 
         let requestID = UUID()
-        self.lastUUID = requestID
+        lastUUID = requestID
 
         currentTask = Task {
             do {
@@ -50,11 +50,9 @@ final class AsyncDebouncer<Input: Equatable, Output> {
                     return
                 }
                 await onCompletion(.success(result))
-            }
-            catch is CancellationError {
+            } catch is CancellationError {
                 log.logE("CancellationError", .failure)
-            }
-            catch  {
+            } catch {
                 if error.localizedDescription != "cancelled" {
                     log.logE(error.localizedDescription, .failure)
                     await onCompletion(.failure(error))

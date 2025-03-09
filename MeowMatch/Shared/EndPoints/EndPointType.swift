@@ -11,5 +11,3 @@ protocol EndPointType {
     associatedtype Response: Decodable
     var request: RequestBuilder { get }
 }
-
-

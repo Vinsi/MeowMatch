@@ -109,7 +109,8 @@ struct DefaultColorPalette: ColorPalette {
          secondary: Color = Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)),
          background: Color = Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)),
          textPrimary: Color = Color(#colorLiteral(red: 0.09019608051, green: 0, blue: 0.3019607961, alpha: 1)),
-         textSecondary: Color = Color(#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1))) {
+         textSecondary: Color = Color(#colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1)))
+    {
         self.primary = primary
         self.secondary = secondary
         self.background = background

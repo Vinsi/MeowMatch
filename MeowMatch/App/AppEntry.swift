@@ -76,10 +76,10 @@ struct RootView: View {
         ZStack {
             TabView(selection: $router.selectedTab) {
                 BreedListView()
-                .tag(Router.Tab.list)
+                    .tag(Router.Tab.list)
 
                 SearchView()
-                .tag(Router.Tab.search)
+                    .tag(Router.Tab.search)
             }
 
             .accentColor(themeManager.currentTheme.colors.primary)
@@ -91,21 +91,18 @@ struct RootView: View {
                     .padding()
                     .foregroundColor(theme.colors.secondary)
                     .background(RoundedRectangle(cornerRadius: theme.dimensions.cornerRadius)
-                    .fill(themeManager.currentTheme.colors.primary))
+                        .fill(themeManager.currentTheme.colors.primary))
             }
         }
-
     }
 }
-
 
 // MARK: - 🛠 Preview
 
 #Preview {
     RootView()
-    .environmentObject(AppEnvironment.shared)
-    .environmentObject(Router())
-    .environmentObject(ThemeManager())
-    .environmentObject(InternetConnectivityCheckerImpl(isMock: true))
+        .environmentObject(AppEnvironment.shared)
+        .environmentObject(Router())
+        .environmentObject(ThemeManager())
+        .environmentObject(InternetConnectivityCheckerImpl(isMock: true))
 }
-

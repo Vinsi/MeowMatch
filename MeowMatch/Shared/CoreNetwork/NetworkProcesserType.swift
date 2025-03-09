@@ -34,14 +34,14 @@ struct NetworkProcesserTypeImpl: NetworkProcesserType {
         }
 
         if let cachedData = await cache.getValue(forKey: cacheKey) {
-            logNet.logW("network.from.cache[\(request.url?.absoluteString ?? "" )]")
+            logNet.logW("network.from.cache[\(request.url?.absoluteString ?? "")]")
             return try decoder.decode(T.Response.self, from: cachedData)
         } else {
             let request = try endpoint.request.makeUrlRequest()
-            logNet.logI("network.started[\(request.url?.absoluteString ?? "" )]")
+            logNet.logI("network.started[\(request.url?.absoluteString ?? "")]")
             let response = try await urlTaskProvider.data(for: request)
-            logNet.logI("network.completed[\(request.url?.absoluteString ?? "" )]",.success)
-            let responseModel =  try extractResponse(response, type: T.Response.self)
+            logNet.logI("network.completed[\(request.url?.absoluteString ?? "")]", .success)
+            let responseModel = try extractResponse(response, type: T.Response.self)
             await cache.setValue(response.0, forKey: cacheKey)
             return responseModel
         }

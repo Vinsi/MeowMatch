@@ -17,7 +17,6 @@ final class Router: ObservableObject {
     public enum Tab: String, CaseIterable {
         case list
         case search
-
     }
 
     @Published var navPath = NavigationPath()
@@ -50,7 +49,6 @@ extension Router.Destination {
             CatDetailView(viewModel: viewModel)
         }
     }
-
 }
 
 extension View {

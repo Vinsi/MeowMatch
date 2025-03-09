@@ -16,7 +16,7 @@ enum ConnectionType {
 }
 
 final class InternetConnectivityCheckerImpl: ObservableObject {
-    
+
     private let monitor = NWPathMonitor()
     private let queue = DispatchQueue(label: #function)
     private let isMock: Bool

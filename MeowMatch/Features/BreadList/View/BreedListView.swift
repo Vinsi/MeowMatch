@@ -14,11 +14,10 @@ struct BreedListView: View {
     @EnvironmentObject private var router: Router
     @EnvironmentObject private var environment: AppEnvironment
     @EnvironmentObject private var themeManager: ThemeManager
-    @StateObject var viewModel: BreedListViewModel = BreedListViewModel(
+    @StateObject var viewModel: BreedListViewModel = .init(
         service: BreedListServiceImpl(network: NetworkProcesserTypeImpl())
     )
     var onTap: ((ListViewDataType) -> Void)?
-
 
     var body: some View {
         NavigationView {

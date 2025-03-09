@@ -1,5 +1,5 @@
 //
-//  HomeServiceType.swift
+//  BreedListServiceType.swift
 //  MeowMatch
 //
 //  Created by Vinsi.

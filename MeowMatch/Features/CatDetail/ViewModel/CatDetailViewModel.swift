@@ -52,7 +52,7 @@ final class CatDetailViewModel: ObservableObject {
             (Localized.Links.wikipedia, breed.wikipediaURL),
             (Localized.Links.cfa, breed.cfaURL),
             (Localized.Links.vetStreet, breed.vetstreetURL),
-            (Localized.Links.vcaHospital, breed.vcahospitalsURL)
+            (Localized.Links.vcaHospital, breed.vcahospitalsURL),
         ]
         .compactMap {
             guard let url = $0.1?.asURL else { return nil }
@@ -76,7 +76,7 @@ final class CatDetailViewModel: ObservableObject {
             (Localized.Attributes.intelligence, breed.intelligence?.as5star),
             (Localized.Attributes.sheddingLevel, breed.sheddingLevel?.as5star),
             (Localized.Attributes.lifeSpan, breed.lifeSpan),
-            (Localized.Attributes.temperament, breed.temperament)
+            (Localized.Attributes.temperament, breed.temperament),
         ]
         .compactMap { value -> (String, String)? in
             guard let text = value.1 else {

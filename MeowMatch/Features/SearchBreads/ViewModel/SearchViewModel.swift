@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 @MainActor
 final class SearchViewModel: ObservableObject {
     @Published private(set) var dataState: DataState<[ListViewDataType], any Error> = .notStarted
@@ -18,7 +19,7 @@ final class SearchViewModel: ObservableObject {
     }
 
     private let searchService: BreadSearchServiceType
-    private let debouncer = AsyncDebouncer<String, [CatBreed]> (delay: 0.3)
+    private let debouncer = AsyncDebouncer<String, [CatBreed]>(delay: 0.3)
     private var router: Router?
 
     init(searchService: BreadSearchServiceType) {
@@ -48,9 +49,8 @@ final class SearchViewModel: ObservableObject {
 
     @MainActor
     func loader(isShowing: Bool = true) {
-        self.isLoading = isLoading
+        isLoading = isLoading
     }
-
 
     func retry() {
         search(searchText)
