@@ -18,7 +18,7 @@ final class SearchViewModel: ObservableObject {
     }
 
     private let searchService: BreadSearchServiceType
-    private let debouncer = AsyncDebouncer<String, [CatBreed] >(delay: 0.3)
+    private let debouncer = AsyncDebouncer<String, [CatBreed]> (delay: 0.3)
     private var router: Router?
 
     init(searchService: BreadSearchServiceType) {

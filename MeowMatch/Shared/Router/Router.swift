@@ -10,8 +10,6 @@ import SwiftUI
 final class Router: ObservableObject {
 
     public enum Destination: Codable, Hashable {
-      //  case search
-      //  case list
         case details(breed: CatBreed)
     }
 
@@ -61,6 +59,4 @@ extension View {
             destination.toView
         }
     }
-
-
 }
